@@ -9,7 +9,7 @@ add_library(${PROJECT_NAME} STATIC)
 
 target_sources(${PROJECT_NAME}
     PRIVATE
-        src/test.cpp
+        src/test.cc
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -21,7 +21,7 @@ target_include_directories(${PROJECT_NAME}
 )
 
 set(PUBLIC_HEADERS
-    include/test.hpp
+    include/test.hh
 )
 
 set_target_properties(${PROJECT_NAME} 

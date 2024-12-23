@@ -14,7 +14,7 @@ add_executable(${PROJECT_NAME})
 
 target_sources(${PROJECT_NAME}
     PRIVATE
-        src/main.cpp
+        src/main.cc
 )
 
 target_link_libraries(${PROJECT_NAME} 
@@ -41,3 +41,15 @@ else()
 endif()
 
 add_compile_definitions("GNG_DEBUG_MODE=$<CONFIG:Debug>")
+
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+
+set(CPACK_GENERATOR DEB)
+
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+
+set(CPACK_PACKAGE_CONTACT example@example.com)
+
+include(CPack)
