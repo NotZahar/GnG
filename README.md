@@ -1,0 +1,12 @@
+# ide
+.vscode/
+
+# clangd
+.cache/
+
+# build
+build/
+install/
+
+# docs
+documentation/

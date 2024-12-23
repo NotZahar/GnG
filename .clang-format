@@ -1,0 +1,8 @@
+---
+BasedOnStyle: Google
+AllowShortBlocksOnASingleLine: 'true'
+BinPackParameters: 'false'
+Language: Cpp
+PointerAlignment: Left
+
+...
