@@ -10,18 +10,22 @@ jobs:
     runs-on: ubuntu-22.04
     permissions: write-all
     steps:
-      - run: sudo apt update && sudo apt install software-properties-common -y
-      - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-      - run: sudo apt update
-      - run: sudo apt install gcc-13 g++-13 cmake libgtest-dev -y
-      - run: sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13 --slave /usr/bin/g++ g++ /usr/bin/g++-13
+      - name: install deps
+        run: >
+          sudo apt update && sudo apt install software-properties-common -y
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+          sudo apt update
+          sudo apt install gcc-13 g++-13 cmake libgtest-dev -y
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13 --slave /usr/bin/g++ g++ /usr/bin/g++-13
 
       - uses: actions/checkout@v3
-      - run: cmake . -DCMAKE_BUILD_TYPE=Release -DPATCH_VERSION=${{ github.run_number }}
-      - run: cmake --build . --target install
-      - run: cmake --build . --target package
+      - name: checkout
+        run: >
+          cmake . -DCMAKE_BUILD_TYPE=Release -DPATCH_VERSION=${{ github.run_number }}
+          cmake --build . --target install
+          cmake --build . --target package
       
-      - name: Create Release
+      - name: create release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -32,7 +36,7 @@ jobs:
           draft: false
           prerelease: false
       
-      - name: Upload Release Asset
+      - name: upload release
         id: upload_release_asset
         uses: actions/upload-release-asset@v1
         env:
