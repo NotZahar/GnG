@@ -12,18 +12,19 @@ jobs:
     steps:
       - name: install deps
         run: >
-          sudo apt update && sudo apt install software-properties-common -y
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-          sudo apt update
-          sudo apt install gcc-13 g++-13 cmake libgtest-dev -y
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13 --slave /usr/bin/g++ g++ /usr/bin/g++-13
+          sudo apt update 
+          && sudo apt install software-properties-common -y
+          && sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+          && sudo apt update
+          && sudo apt install gcc-13 g++-13 cmake libgtest-dev -y
+          && sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13 --slave /usr/bin/g++ g++ /usr/bin/g++-13
 
       - uses: actions/checkout@v3
       - name: checkout
         run: >
           cmake . -DCMAKE_BUILD_TYPE=Release -DPATCH_VERSION=${{ github.run_number }}
-          cmake --build . --target install
-          cmake --build . --target package
+          && cmake --build . --target install
+          && cmake --build . --target package
       
       - name: create release
         id: create_release
